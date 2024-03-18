@@ -1,0 +1,15 @@
+% Read the input image
+image = imread('leaves1.png');
+
+% Convert the image to grayscale
+gray_image = rgb2gray(image);
+
+% Increase contrast
+high_contrast_image = imadjust(gray_image);
+
+% Decrease brightness in this 0.1  and 0.8 that value changing and i can change it brigthness and contrast.
+low_brightness_image = imadjust(high_contrast_image, [], [0.1 0.8]);
+
+% Display the modified image
+imshow(low_brightness_image);
+title('Grayscale Image with Adjusted Contrast and Brightness');
