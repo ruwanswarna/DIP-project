@@ -1,0 +1,16 @@
+%photo sharpnes increased and easily can identify whitefly have place in the leaves surface 
+% Read the input image (sharpness changing)
+image = imread('leaves1.png');
+
+% Convert the image to grayscale
+gray_image = rgb2gray(image);
+
+% Enhance sharpness using unsharp masking
+sharpened_image = imsharpen(gray_image);
+
+% Adjust contrast
+adjusted_image = imadjust(sharpened_image, [0.2 0.8], []);
+
+% Display the sharpened and contrast-adjusted image
+imshow(adjusted_image);
+title('Sharpened and Contrast-Adjusted Image');
