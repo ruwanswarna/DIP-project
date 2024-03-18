@@ -1,0 +1,20 @@
+>>  [cdata_12, ~, alphadata_12] = imread("/MATLAB Drive/leaves1.png");
+% Read the input image
+image = imread('leaves1.png');
+
+% Convert the image to grayscale
+gray_image = rgb2gray(image);
+
+% Display the grayscale image
+imshow(gray_image);
+title('Grayscale Image');
+
+>> % Read the input image
+image = imread('leaves1.png');
+
+% Convert the image to grayscale
+gray_image = rgb2gray(image);
+
+% Display the grayscale image
+imshow(gray_image);
+title('Grayscale Image');
