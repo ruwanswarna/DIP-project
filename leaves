@@ -1,0 +1,39 @@
+% Step 1: Read an image
+image = imread('leaf_with_whiteflies.jpg');
+
+% Step 2: Preprocessing
+% You might need to perform preprocessing steps such as noise reduction,
+% contrast enhancement, and resizing.
+% For simplicity, we'll skip this step in this example.
+
+% Step 3: Segmentation
+% Convert the image to grayscale
+gray_image = rgb2gray(image);
+
+% Apply a threshold to segment whiteflies
+threshold_value = 150; % Adjust this value as needed
+binary_image = gray_image < threshold_value;
+
+% Step 4: Morphological operations (optional)
+% Perform morphological operations to remove noise or enhance the whitefly regions
+% For example, you can use morphological closing to close small gaps in the whitefly regions
+se = strel('disk', 5);
+binary_image_processed = imclose(binary_image, se);
+
+% Step 5: Connected component analysis
+% Use connected component analysis to identify and label individual whitefly regions
+[label_matrix, num_labels] = bwlabel(binary_image_processed);
+
+% Step 6: Feature extraction (optional)
+% Extract features of the whitefly regions if needed
+% For example, you can use regionprops to calculate properties like area, centroid, or bounding box
+
+% Step 7: Visualization
+% Display the original image with the detected whitefly regions overlaid
+RGB = insertShape(image, 'FilledRectangle', regionprops('BoundingBox', label_matrix));
+imshow(RGB);
+
+% Step 8: Counting
+% Count the number of whitefly regions
+num_whiteflies = num_labels;
+disp(['Number of whiteflies detected: ', num2str(num_whiteflies)]);
