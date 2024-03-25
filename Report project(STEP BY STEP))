@@ -1,0 +1,237 @@
+%(STEP_01) THIS IS THE CODE Substracting the blue channel from green channel.....................................................................................................................................
+
+% Read the RGB image
+rgb_img = imread('Picture1.png'); 
+red_channel = rgb_img(:,:,1);
+green_channel = rgb_img(:,:,2);
+blue_channel = rgb_img(:,:,3);
+
+% Subtract blue channel from green channel
+subtracted_img = green_channel - blue_channel;
+
+% Display the original and subtracted images side by side
+figure;
+subplot(1,2,1);
+imshow(rgb_img);
+title('Original RGB Image');
+
+subplot(1,2,2);
+imshow(subtracted_img, []);
+title('Resulting Image (Green - Blue)');
+
+%(STEP_02) THIS IS THE CODE K Channel CMYK.........................................................................................................................................................................
+
+rgb_img = imread('Picture1.png'); 
+cmyk_img = rgb2cmyk(rgb_img);
+
+% Extract the K (black) channel
+k_channel = cmyk_img(:,:,4);
+
+% Display the K channel image
+figure;
+imshow(k_channel);
+title('K (Black) Channel Image');
+
+
+function cmyk_img = rgb2cmyk(rgb_img)
+    % Convert RGB image to CMYK
+    
+    % Check if input image is in uint8 format, if not, convert it
+    if ~isa(rgb_img, 'uint8')
+        rgb_img = im2uint8(rgb_img);
+    end
+    
+    % Convert RGB image to double for calculations
+    rgb_img = double(rgb_img);
+    
+    % Normalize RGB values to range [0, 1]
+    r = rgb_img(:,:,1) / 255;
+    g = rgb_img(:,:,2) / 255;
+    b = rgb_img(:,:,3) / 255;
+    
+    % Convert RGB to CMY
+    c = 1 - r;
+    m = 1 - g;
+    y = 1 - b;
+    
+    % Calculate K (black) channel
+    k = min(min(c, m), y);
+    
+    % Adjust CMY channels by subtracting K
+    c = (c - k) ./ (1 - k);
+    m = (m - k) ./ (1 - k);
+    y = (y - k) ./ (1 - k);
+    
+    % Create CMYK image
+    cmyk_img = cat(3, c, m, y, k);
+    
+    % Convert CMYK values to range [0, 255] and cast back to uint8
+    cmyk_img = uint8(cmyk_img * 255);
+end
+
+%(STEP_03) THIS IS THE CODE Channel b of CIEALAB.........................................................................................................................................................................
+
+
+% Read the RGB image
+rgb_img = imread('Picture1.png');
+lab_img = rgb2lab(rgb_img);
+
+% Extract the b* channel (blue-yellow color component)
+b_channel = lab_img(:,:,3);
+
+% Display the b* channel image
+imshow(b_channel, []);
+title('b* Channel Image');
+
+function lab_img = rgb2lab(rgb_img)
+    % Convert RGB image to LAB color space
+    
+    % Convert uint8 image to double
+    rgb_img = double(rgb_img) / 255;
+    
+    % Apply gamma correction to linearize RGB values
+    rgb_img = gamma_correction(rgb_img);
+    
+    % Convert RGB to XYZ
+    xyz_img = rgb2xyz(rgb_img);
+    
+    % Normalize XYZ values
+    xyz_img = xyz_img / max(xyz_img(:));
+    
+    % Define white reference (D50)
+    white_ref = [0.96422, 1.00000, 0.82521];
+    
+    % Convert XYZ to LAB
+    lab_img = xyz2lab(xyz_img, white_ref);
+end
+
+function corrected_img = gamma_correction(img)
+    % Apply gamma correction to linearize RGB values
+    
+    % Define gamma value (sRGB standard)
+    gamma = 2.2;
+    
+    % Apply gamma correction
+    corrected_img = img .^ gamma;
+end
+
+function xyz_img = rgb2xyz(rgb_img)
+    % Convert RGB to XYZ color space
+    
+    % RGB to XYZ conversion matrix
+    M = [0.4124564 0.3575761 0.1804375;
+         0.2126729 0.7151522 0.0721750;
+         0.0193339 0.1191920 0.9503041];
+     
+    % Reshape RGB image for matrix multiplication
+    [h, w, ~] = size(rgb_img);
+    rgb_vec = reshape(rgb_img, h*w, 3)';
+    
+    % Convert RGB to XYZ
+    xyz_vec = M * rgb_vec;
+    
+    % Reshape XYZ vector back to image
+    xyz_img = reshape(xyz_vec', h, w, []);
+end
+
+function lab_img = xyz2lab(xyz_img, white_ref)
+    % Convert XYZ to LAB color space
+    
+    % Define white reference XYZ values
+    Xn = white_ref(1);
+    Yn = white_ref(2);
+    Zn = white_ref(3);
+    
+    % Normalize XYZ values
+    X = xyz_img(:,:,1) / Xn;
+    Y = xyz_img(:,:,2) / Yn;
+    Z = xyz_img(:,:,3) / Zn;
+    
+    % Apply nonlinear transformation
+    f_X = xyz_nonlinear_transformation(X);
+    f_Y = xyz_nonlinear_transformation(Y);
+    f_Z = xyz_nonlinear_transformation(Z);
+    
+    % Calculate LAB components
+    L = 116 * f_Y - 16;
+    a = 500 * (f_X - f_Y);
+    b = 200 * (f_Y - f_Z);
+    
+    % Combine LAB components into LAB image
+    lab_img = cat(3, L, a, b);
+end
+
+function f = xyz_nonlinear_transformation(t)
+    % Nonlinear transformation function for XYZ to LAB conversion
+    
+    delta = 6 / 29;
+    delta_cubed = delta ^ 3;
+    
+    f = zeros(size(t));
+    f(t > delta_cubed) = t(t > delta_cubed) .^ (1/3);
+    f(t <= delta_cubed) = t(t <= delta_cubed) / (3 * delta ^ 2) + 4/29;
+end
+
+%(STEP_04) THIS IS THE CODE Channel H of HSV model.........................................................................................................................................................................
+
+
+rgb_img = imread('Picture1.png'); 
+hsv_img = rgb2hsv(rgb_img);
+
+% Extract the H (Hue) channel
+h_channel = hsv_img(:,:,1);
+
+% Display the H channel image
+imshow(h_channel, []);
+title('Hue Channel Image');
+
+
+function hsv_img = rgb2hsv(rgb_img)
+    % Convert RGB image to HSV color space
+    
+    % Convert uint8 image to double
+    rgb_img = double(rgb_img) / 255;
+    
+    % Extract RGB channels
+    r = rgb_img(:,:,1);
+    g = rgb_img(:,:,2);
+    b = rgb_img(:,:,3);
+    
+    % Normalize RGB values
+    r_norm = r ./ 255;
+    g_norm = g ./ 255;
+    b_norm = b ./ 255;
+    
+    % Calculate Value (V)
+    V = max(max(r_norm, g_norm), b_norm);
+    
+    % Calculate Saturation (S)
+    delta = V - min(min(r_norm, g_norm), b_norm);
+    S = delta ./ V;
+    
+    % Calculate Hue (H)
+    H = zeros(size(V));
+    
+    % Indices for R, G, B maximum
+    idx_max_r = (V == r_norm) & (delta ~= 0);
+    idx_max_g = (V == g_norm) & (delta ~= 0);
+    idx_max_b = (V == b_norm) & (delta ~= 0);
+    
+    % Calculate Hue for R-maximum
+    H(idx_max_r) = (60 * mod((g_norm(idx_max_r) - b_norm(idx_max_r)) ./ delta(idx_max_r), 6));
+    
+    % Calculate Hue for G-maximum
+    H(idx_max_g) = (60 * ((b_norm(idx_max_g) - r_norm(idx_max_g)) ./ delta(idx_max_g) + 2));
+    
+    % Calculate Hue for B-maximum
+    H(idx_max_b) = (60 * ((r_norm(idx_max_b) - g_norm(idx_max_b)) ./ delta(idx_max_b) + 4));
+    
+    % Correct negative Hue values
+    H(H < 0) = H(H < 0) + 360;
+    
+    % Normalize Hue to [0, 1]
+    H = H / 360;
+    
+    % Combine H, S, V channels into HSV image
+    hsv_img = cat(3, H, S, V);
+end
