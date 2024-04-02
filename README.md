@@ -51,5 +51,8 @@ After thresholding is done all objects in thresholded images smaller than 10% of
 ## Counting objects in each image
 Connected component analysis or contour detection can be used to count each individual object which corresponds to each whitefly adults or growth stages.
 
-this is the youtube link:  https://youtu.be/oMZeE4iG0ek
+This is the youtube link:  https://youtu.be/oMZeE4iG0ek
+##### Find the source code inside dipproject directory.
+##### Find the executable file here: https://drive.google.com/drive/folders/1gLfm5QyQ5jG9BKmkHq66DOrH-DoQxq4x?usp=sharing
+##### Please note that you will need images directory with the content inside it in the same directory as the whiteflies.exe executable to run this program.
  
