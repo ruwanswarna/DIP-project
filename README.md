@@ -4,6 +4,6 @@ In this project we have followed the digital image processing methods outlined i
 
 The Whitefly is a type of airborne insect that harm various types of crops like soybean, bean, cassava by feeding on plant sap which causes them to fall off. The following image shows the lifecycle of the whitefly.
 
-![leaves2](leaves2.png)  
+![whitefly stages](DIP/whitefly stages.jpg)  
 this is the youtube link  https://youtu.be/oMZeE4iG0ek
  
