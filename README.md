@@ -27,5 +27,13 @@ Therfore it has to be done in the following way.
 ![how_to_transform](how_to_transform.jpg)  
 
 In this example RGB is converted to HSV normal way. But in the second step, to convert HSV to CIELAB the **RGB to CIELAB method was used instead**.
+So using the above method color transformation chaining was done to identify the whitefly stages in the following way.
+
+- Nymphs: RGB --> LAB --> XYZ (third channel Z was considered)
+- Adult whiteflies: RGB --> XYZ --> XYZ --> CMYK (first channel C was considered)
+- Exoskeletons: RGB --> CMYK --> XYZ (third channel Z was considered)
+- Leaf Leisions and Fungi: RGB --> LAB --> CMYK (second channel M was considered)
+
+
 this is the youtube link  https://youtu.be/oMZeE4iG0ek
  
