@@ -11,6 +11,11 @@ Since whiteflies have different characteristics in different stages of their lif
 ## The methods outlined in the research paper
 There are two methods outlined.
 1. Simple Color Transformation  
-2. Chaining Color Transformations  
+2. Chaining Color Transformations
+
+### 1.Simple Color Transformation
+In this method the RGB image is converted to another color format and from that a single channel or a operation on channels is extracted for further inspection. The following list shows color transformations used to highlight different lifecycle stags.
+
+- from RGB subtract ==blue channel== from ==green channel==                     discriminate nymphs and exo skeletons
 this is the youtube link  https://youtu.be/oMZeE4iG0ek
  
