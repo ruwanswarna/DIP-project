@@ -37,7 +37,7 @@ So using the above method color transformation chaining was done to identify the
 ### But before applying color chaining we have to adjust histogram of the original image, because lighting conditions may change threshold values in the thresholding step.
 For the thresholding rules suggested by the researchers, the original images peak of the green channel was located at the value of 140. So to change the peak of the green channel to 140, we have added the **difference between current peak value of green channel from 140** to all pixels of all channels of the image.
 
-##Thresholding
+## Thresholding
 After adjusting histograms and then applyng color chaining methods given above. The thresholding was applied to seperate areas of intesests from each color transformed image for nymphs, adults, exoskeletons, and leisions & fungi. The following are the thresholding rules. Consider p the pixel value.
 
 - Nymphs: 230 < p white / else black
@@ -45,11 +45,11 @@ After adjusting histograms and then applyng color chaining methods given above. 
 - Exoskeletons: 64 > p  white / else black
 - Leaf Leisions and Fingi: 128 > p  white / else black
 
-##Removing invalid objects from thresholded images
+## Removing invalid objects from thresholded images
 After thresholding is done all objects in thresholded images smaller than 10% of the size of the largest object is removed.
 
-##Counting objects in each image
+## Counting objects in each image
 Connected component analysis or contour detection can be used to count each individual object which corresponds to each whitefly adults or growth stages.
 
-this is the youtube link  https://youtu.be/oMZeE4iG0ek
+this is the youtube link:  https://youtu.be/oMZeE4iG0ek
  
