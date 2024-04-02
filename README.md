@@ -23,5 +23,9 @@ In this method the RGB image is converted to another color format and from that 
 In this method multiple color transformations applied one after another, to reveal new information not visible in original images.
 But this cannot be done simply tansforming one after another because resulting image will be equal to a direct transformation from original image to the last transformation.
 Therfore it has to be done in the following way.
+
+![how_to_transform](how_to_transform.jpg)  
+
+In this example RGB is converted to HSV normal way. But in the second step, to convert HSV to CIELAB the **RGB to CIELAB method was used instead**.
 this is the youtube link  https://youtu.be/oMZeE4iG0ek
  
