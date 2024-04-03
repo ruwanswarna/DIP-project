@@ -56,4 +56,5 @@ Connected component analysis or contour detection can be used to count each indi
 ##### Find the source code inside dipproject directory.
 ##### Find the executable file here: https://drive.google.com/drive/folders/1gLfm5QyQ5jG9BKmkHq66DOrH-DoQxq4x?usp=sharing
 ##### Please note that you will need images directory with the content inside it in the same directory as the whiteflies.exe executable to run this program.
+##### Also you might need python installed in the local machine.
  
