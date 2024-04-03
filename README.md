@@ -43,7 +43,7 @@ After adjusting histograms and then applyng color chaining methods given above. 
 - Nymphs: 230 < p white / else black
 - Adult whiteflies: 13 > p  white / else black
 - Exoskeletons: 64 > p  white / else black
-- Leaf Leisions and Fingi: 128 > p  white / else black
+- Leaf Leisions and Fungi: 128 > p  white / else black
 
 ## Removing invalid objects from thresholded images
 After thresholding is done all objects in thresholded images smaller than 10% of the size of the largest object is removed.
