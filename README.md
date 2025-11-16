@@ -24,7 +24,7 @@ In this method multiple color transformations applied one after another, to reve
 But this cannot be done simply tansforming one after another because resulting image will be equal to a direct transformation from original image to the last transformation.
 Therfore it has to be done in the following way.
 
-![how_to_transform](how_to_transform.jpg)  
+![how_to_transform](README_content/how_to_transform.jpg)  
 
 In this example RGB is converted to HSV normal way. But in the second step, to convert HSV to CIELAB the **RGB to CIELAB method was used instead**.
 So using the above method color transformation chaining was done to identify the whitefly stages in the following way.
